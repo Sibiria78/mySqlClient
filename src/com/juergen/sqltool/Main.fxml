@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--?import com.gluonhq.charm.glisten.control.TextField?-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="487.0" prefWidth="800.0" style="-fx-background-color: #bbdefb;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.juergen.sqltool.MainController">
+   <children>
+      <TableView fx:id="resultTable" layoutX="36.0" layoutY="216.0" onMouseClicked="#handleMouseTableAction" prefHeight="245.0" prefWidth="743.0" />
+      <Button fx:id="btnExecute" contentDisplay="CENTER" layoutX="230.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleExecuteButtonAction" prefHeight="32.0" prefWidth="99.0" text="Execute" />
+      <Label layoutX="36.0" layoutY="24.0" text="Query">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfQuery" layoutX="95.0" layoutY="21.0" prefHeight="26.0" prefWidth="679.0" />
+      <Label fx:id="lblOutput" layoutX="36.0" layoutY="112.0" text="Output">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="txtOutput" layoutX="95.0" layoutY="105.0" prefHeight="99.0" prefWidth="687.0" />
+      <Button fx:id="btnHistory" contentDisplay="CENTER" layoutX="351.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleHistoryButtonAction" prefHeight="32.0" prefWidth="174.0" text="Show Command History" />
+   </children>
+</AnchorPane>

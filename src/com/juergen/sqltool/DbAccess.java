@@ -50,16 +50,14 @@ public class DbAccess {
         return null;
     }
     
-    public ObservableList<Books> executeQuery(String q) throws Exception {
-        String defaultQuery = "SELECT * from books";
-        if (q.startsWith("sel")) {
+    public ObservableList<Books> executeQuery(Query q) throws Exception {
+        if (q.getType().equals(Query.SELECT)) {
             status = null;
-            return getBooksList(defaultQuery);
+            return getBooksList(Query.getDefault());
         }
-        ObservableList<Books> bookList = FXCollections.observableArrayList();
-        int returnValue = executeUpdate(q);
+        int returnValue = q.executeUpdate();
         status = returnValue + " row(s) updated.";
-        return getBooksList(defaultQuery);
+        return getBooksList(Query.getDefault());
     }
     
     public ObservableList<Books> getBooksList(String query) throws Exception {
@@ -93,12 +91,6 @@ public class DbAccess {
         }            
         return bookList;
     }
-    
-    public int executeUpdate(String query) throws Exception {
-        Statement st = getConnection().createStatement();
-        return st.executeUpdate(query);
-    }
-
     
     public List<String> getColumns() {
         return columns;

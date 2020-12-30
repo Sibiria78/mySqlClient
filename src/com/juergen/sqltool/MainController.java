@@ -42,13 +42,13 @@ public class MainController implements Initializable {
     void handleExecuteButtonAction(ActionEvent event) {
         dbAccess.removeAllColumns();
         resultTable.getColumns().clear();
-        String query = tfQuery.getText();
-        System.out.println("Query to execute: "+query);
-        if (query == null || "".equals(query) || query.length() < 10) {
+        Query query = new Query(tfQuery.getText(), dbAccess.getConnection());
+        System.out.println("Query to execute: "+query.getQuery());
+        if (!query.isValid()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Just for your information...");
             alert.setHeaderText("Your Query is invalid!");
-            alert.setContentText("Query '" + query + "' is invalid!");
+            alert.setContentText("Query '" + query.getQuery() + "' is invalid!");
             alert.showAndWait();
         } else {
             try {

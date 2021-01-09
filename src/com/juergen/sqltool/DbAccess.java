@@ -32,17 +32,15 @@ public class DbAccess {
     
     private String status;
     
-    /*
-     * How to fix the problem with the time zone:
-     * https://stackoverflow.com/questions/50493398/mysql-connector-error-the-server-time-zone-value-central-european-time
-    */
     public final Connection getConnection() {
         if (conn != null) {
             return conn;
         }
         try {
-            String addMe = "?useLegacyDatetimeCode=false&serverTimezone=Europe/Amsterdam&useSSL=false";
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/library"+addMe, "root", "root");
+            final DbProperties dbProperties = new DbProperties();
+            conn = DriverManager.getConnection(dbProperties.getUrl(), "root", "root");
+                                               //dbProperties.getUserName(),
+                                               //dbProperties.getPassword());
             return conn;
         } catch (Exception e) {
             System.out.println("Error: no DB connection! "+e.getMessage());

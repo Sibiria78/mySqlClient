@@ -6,7 +6,6 @@
 package com.juergen.sqltool;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,7 +33,7 @@ public class Query {
         checkValidity();
         try {
             addToHistory();
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Query.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -80,7 +79,10 @@ public class Query {
         return st.executeUpdate(getQuery());
     }
 
-    private void addToHistory() throws SQLException {
+    private void addToHistory() throws Exception {
+        if (conn == null) {
+            throw new IllegalStateException("Connection to the DB has failed!");
+        }
         Statement st = conn.createStatement();
         st.executeUpdate("INSERT INTO sqlhist (command) values ('"+getQuery()+"')");
     }
